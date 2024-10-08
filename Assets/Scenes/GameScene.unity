@@ -414,7 +414,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74dc33ea75239864da8d628b6e20c817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
   ball: {fileID: 1103222791}
   rb: {fileID: 496402163}
 --- !u!50 &496402163
@@ -1007,8 +1006,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b08f4ab95ed789459f6603146744f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScoreTxt: {fileID: 1893080142}
-  computerScoreTxt: {fileID: 2138551594}
   rb: {fileID: 1103222798}
   startingSpeed: 8
   maxStartAngle: 70
@@ -1280,6 +1277,53 @@ RectTransform:
   m_AnchoredPosition: {x: -1, y: 3.5}
   m_SizeDelta: {x: 1.0628, y: 1.8963}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2063964420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2063964422}
+  - component: {fileID: 2063964421}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2063964421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063964420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0bfc155d87445aaa57fbb7ec808714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScoreTxt: {fileID: 1893080142}
+  computerScoreTxt: {fileID: 2138551594}
+  targetScore: 0
+--- !u!4 &2063964422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063964420}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 825.0078, y: 454.32648, z: -11.502697}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2138551593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,3 +1679,4 @@ SceneRoots:
   - {fileID: 1893080144}
   - {fileID: 2138551596}
   - {fileID: 496402166}
+  - {fileID: 2063964422}

@@ -13,7 +13,7 @@ public class End : MonoBehaviour
     void Start()
     {
         winLossTxt.text = PlayerPrefs.GetString("end");
-        returnToMenuBtn.onClick.AddListener(() => SceneManager.LoadScene("MenuScene"));
+        returnToMenuBtn.onClick.AddListener(() => SceneManager.LoadScene("StartScene"));
     }
     
 }

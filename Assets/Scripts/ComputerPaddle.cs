@@ -1,29 +1,25 @@
 using UnityEngine;
 
-public class ComputerPaddle : MonoBehaviour
+public class ComputerPaddle : Paddle
 {
-    [SerializeField] private GameObject ball; 
-    [SerializeField] private Rigidbody2D rb;
-    private float _speed;
-    private float _paddleHeight;
-    private float _minY, _maxY;
+    [SerializeField] private GameObject ball;
 
-    void Start()
+    public override void Start()
     {
-        _paddleHeight = GetComponent<BoxCollider2D>().bounds.extents.y;
-        _minY = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y + _paddleHeight;
-        _maxY = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y - _paddleHeight;
-        _speed = PlayerPrefs.GetFloat("speed");
+        base.Start();
+        Speed = PlayerPrefs.GetFloat("speed", 3f);
     }
 
     void FixedUpdate()
     {
+        MovePaddle();
+    }
+
+    public override void MovePaddle()
+    {
         Vector2 ballPosition = ball.transform.position;
-        
-        float targetY = Mathf.Clamp(ballPosition.y, _minY, _maxY);
-        
-        Vector2 newPosition = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, targetY), _speed * Time.fixedDeltaTime);
-        
-        rb.MovePosition(newPosition);
+        float targetY = Mathf.Clamp(ballPosition.y, MinY, MaxY);
+        Vector2 newPosition = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, targetY), Speed * Time.fixedDeltaTime);
+        Rb.MovePosition(newPosition);
     }
 }

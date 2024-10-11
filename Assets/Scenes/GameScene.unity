@@ -414,8 +414,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74dc33ea75239864da8d628b6e20c817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  increaseAmount: 0.5
+  decreaseAmount: 0.5
   ball: {fileID: 1103222791}
-  rb: {fileID: 496402163}
 --- !u!50 &496402163
 Rigidbody2D:
   serializedVersion: 4
@@ -1309,6 +1310,13 @@ MonoBehaviour:
   playerScoreTxt: {fileID: 1893080142}
   computerScoreTxt: {fileID: 2138551594}
   targetScore: 0
+  ball: {fileID: 1103222791}
+  playerPaddle: {fileID: 2144462832}
+  computerPaddle: {fileID: 496402161}
+  powerUpPrefab: {fileID: 2558212137593839835, guid: abaf97223460975469fdb57a55875031, type: 3}
+  powerUpSpawnInterval: 10
+  powerUpLifetime: 5
+  powerUpDuration: 5
 --- !u!4 &2063964422
 Transform:
   m_ObjectHideFlags: 0
@@ -1639,8 +1647,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543647a82f58ee74a9b8932bf1cdd5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  increaseAmount: 0.5
+  decreaseAmount: 0.5
   speed: 10
-  rb: {fileID: 2144462838}
 --- !u!50 &2144462838
 Rigidbody2D:
   serializedVersion: 4

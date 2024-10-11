@@ -26,7 +26,7 @@ public class Ball : MonoBehaviour
         float angle = CalcRandomAngle();
         dir.y = Mathf.Tan(angle * Mathf.Deg2Rad);
         dir = dir.normalized;
-        rb.velocity = dir * _speed;
+        rb.velocity = dir * startingSpeed;
     }
 
     private float CalcRandomAngle()

@@ -1,5 +1,4 @@
-using System;
-using TMPro;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,7 +8,6 @@ public class Ball : MonoBehaviour
     [SerializeField] private float startingSpeed;
     [SerializeField] private float maxStartAngle;
     private float _speed;
-    private Vector2 _direction;
     private GameManager _gameManager;
 
     void Start()
@@ -38,6 +36,18 @@ public class Ball : MonoBehaviour
         } while (angle is > -10f and < 10f);
 
         return angle;
+    }
+
+    public void ActivateInvisibility(float duration)
+    {
+        GetComponent<Renderer>().enabled = false;
+        StartCoroutine(DeactivateInvisibility(duration));
+    }
+
+    private IEnumerator DeactivateInvisibility(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        GetComponent<Renderer>().enabled = true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

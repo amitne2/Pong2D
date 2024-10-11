@@ -10,7 +10,8 @@ public class PowerUp : MonoBehaviour
         IncreaseComputerPaddleSize,
         DecreaseComputerPaddleSize,
         FreezeComputerPaddle,
-        SplitBall
+        SplitBall,
+        InvisibleBall
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -19,7 +20,7 @@ public class PowerUp : MonoBehaviour
         if (other.gameObject.name == "Ball")
         {
             // Choose a random power-up type
-            PowerUpType randomPowerUp = (PowerUpType)Random.Range(0, System.Enum.GetValues(typeof(PowerUpType)).Length);
+            PowerUpType randomPowerUp = PowerUpType.InvisibleBall;//(PowerUpType)Random.Range(0, System.Enum.GetValues(typeof(PowerUpType)).Length);
 
             // Get the GameManager instance and apply the power-up
             GameManager gameManager = FindObjectOfType<GameManager>();

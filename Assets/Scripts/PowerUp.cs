@@ -16,16 +16,10 @@ public class PowerUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the colliding object is the ball
-        if (other.gameObject.name == "Ball")
+        if (other.gameObject.CompareTag("Ball"))
         {
-            // Choose a random power-up type
-            PowerUpType randomPowerUp = PowerUpType.InvisibleBall;//(PowerUpType)Random.Range(0, System.Enum.GetValues(typeof(PowerUpType)).Length);
-
-            // Get the GameManager instance and apply the power-up
+            PowerUpType randomPowerUp = (PowerUpType)Random.Range(0, System.Enum.GetValues(typeof(PowerUpType)).Length);
             GameManager gameManager = FindObjectOfType<GameManager>();
-            
-            // Pass the random power-up and this gameObject to be destroyed after activation
             gameManager.ActivatePowerUp(randomPowerUp, gameObject);
         }
     }

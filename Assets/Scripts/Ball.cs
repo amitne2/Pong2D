@@ -5,26 +5,24 @@ using Random = UnityEngine.Random;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float startingSpeed;
     [SerializeField] private float maxStartAngle;
-    private float _speed;
+    [SerializeField] private float speed;
     private GameManager _gameManager;
 
     void Start()
     {
-        _speed = startingSpeed;
         _gameManager = FindObjectOfType<GameManager>();
         ResetBall();
     }
 
-    private void ResetBall()
+    public void ResetBall()
     {
         transform.position = Vector2.zero;
         Vector2 dir = Random.value < 0.5f ? Vector2.left : Vector2.right;
         float angle = CalcRandomAngle();
         dir.y = Mathf.Tan(angle * Mathf.Deg2Rad);
         dir = dir.normalized;
-        rb.velocity = dir * startingSpeed;
+        rb.velocity = dir * speed;
     }
 
     private float CalcRandomAngle()
@@ -54,23 +52,11 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.name == "Left")
         {
-            _gameManager.ComputerScored();
-            ResetBall();
+            _gameManager.ComputerScored(this);
         }
         else if (collision.gameObject.name == "Right")
         {
-            _gameManager.PlayerScored();
-            ResetBall();
+            _gameManager.PlayerScored(this);
         }
-        else if (collision.gameObject.name == "PlayerPaddle")
-        {
-            IncreaseBallSpeed();
-        }
-    }
-
-    private void IncreaseBallSpeed()
-    {
-        _speed += 0.5f;
-        rb.velocity = rb.velocity.normalized * _speed;
     }
 }

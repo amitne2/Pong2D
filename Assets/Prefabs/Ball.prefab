@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7667410206220516138}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3415446400513538520}
-  startingSpeed: 8
   maxStartAngle: 70
+  speed: 10
 --- !u!50 &3415446400513538520
 Rigidbody2D:
   serializedVersion: 4

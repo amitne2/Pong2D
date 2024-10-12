@@ -2,22 +2,24 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text playerScoreTxt;
     [SerializeField] private TMP_Text computerScoreTxt;
     [SerializeField] private int targetScore;
-    [SerializeField] private GameObject ball;
+    [SerializeField] private GameObject ballPrefab;
     [SerializeField] private GameObject playerPaddle;
     [SerializeField] private GameObject computerPaddle;
     [SerializeField] private GameObject powerUpPrefab;
     [SerializeField] private float powerUpSpawnInterval = 10f;
-    [SerializeField] private float powerUpLifetime = 7f;
+    [SerializeField] private float powerUpLifetime = 5f;
     [SerializeField] private float powerUpDuration = 5f;
 
     private int _playerScore;
     private int _computerScore;
+    private readonly List<GameObject> _balls = new List<GameObject>();
 
     void Start()
     {
@@ -25,19 +27,35 @@ public class GameManager : MonoBehaviour
         _computerScore = 0;
         UpdateScoreTexts();
         targetScore = PlayerPrefs.GetInt("target");
+        _balls.Add(Instantiate(ballPrefab));  
         StartCoroutine(SpawnPowerUps());
     }
 
-    public void PlayerScored()
+    public void PlayerScored(Ball ball)
     {
-        _playerScore++;
+        HandleBallScored(ball, ref _playerScore);
         CheckForEndGame("You Win!");
     }
 
-    public void ComputerScored()
+    public void ComputerScored(Ball ball)
     {
-        _computerScore++;
+        HandleBallScored(ball, ref _computerScore);
         CheckForEndGame("You Lose!");
+    }
+
+    private void HandleBallScored(Ball ball, ref int score)
+    {
+        score++;
+        if (_balls.Count > 1)
+        {
+            _balls.Remove(ball.gameObject);
+            Destroy(ball.gameObject);
+        }
+        else
+        {
+            ball.ResetBall();
+        }
+        UpdateScoreTexts();
     }
 
     private void CheckForEndGame(string endText)
@@ -47,7 +65,6 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetString("end", endText);
             SceneManager.LoadScene("EndScene");
         }
-        UpdateScoreTexts();
     }
 
     private void UpdateScoreTexts()
@@ -85,11 +102,21 @@ public class GameManager : MonoBehaviour
                 break;
 
             case PowerUp.PowerUpType.InvisibleBall:
-                ball.GetComponent<Ball>().ActivateInvisibility(powerUpDuration);
+                _balls[0].GetComponent<Ball>().ActivateInvisibility(powerUpDuration);
+                break;
+
+            case PowerUp.PowerUpType.SplitBall:
+                SplitBall();
                 break;
         }
 
         Destroy(powerUpObject);
+    }
+
+    private void SplitBall()
+    {
+        GameObject newBall = Instantiate(ballPrefab, _balls[0].transform.position, Quaternion.identity);
+        _balls.Add(newBall);
     }
 
     private IEnumerator HandlePaddleSizeChange(GameObject paddle, bool increaseSize)
